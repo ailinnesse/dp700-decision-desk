@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fabric Decision Desk — DP-700</title>
+<meta name="description" content="A scenario drill for Exam DP-700. Learn which trigger phrase in the question rules out which Fabric item.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EEF0E6; --card:#F8F9F3; --ink:#16211A; --ink2:#4E5C53;
+  --forest:#2A5730; --moss:#6FA84B; --gold:#B8860B; --slate:#1F4E79; --rust:#A8412B;
+  --rule:#D2D8C4; --rule2:#E2E7D8;
+  --d1:var(--slate); --d2:var(--forest); --d3:var(--gold);
+  --disp:"Bricolage Grotesque",system-ui,sans-serif;
+  --body:"Public Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;
+  background-image:linear-gradient(var(--rule2) 1px,transparent 1px),linear-gradient(90deg,var(--rule2) 1px,transparent 1px);
+  background-size:28px 28px;background-position:-1px -1px}
+.wrap{max-width:940px;margin:0 auto;padding:0 20px 80px}
+
+/* ---------- masthead ---------- */
+header{padding:44px 0 26px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin:0 0 12px}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(38px,7.5vw,66px);line-height:.94;letter-spacing:-.03em;margin:0 0 14px}
+h1 em{font-style:normal;color:var(--forest)}
+.thesis{max-width:52ch;font-size:17px;color:var(--ink2);margin:0}
+.thesis b{color:var(--ink);font-weight:600}
+
+/* ---------- tabs ---------- */
+nav{display:flex;gap:0;margin:30px 0 0;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+nav button{appearance:none;background:none;border:0;border-bottom:4px solid transparent;margin-bottom:-3px;
+  font-family:var(--disp);font-weight:600;font-size:16px;letter-spacing:-.01em;color:var(--ink2);
+  padding:10px 18px 9px;cursor:pointer}
+nav button:hover{color:var(--ink)}
+nav button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--gold)}
+nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
+.tabnote{font-family:var(--mono);font-size:11px;color:var(--ink2);padding:12px 0 0;letter-spacing:.02em}
+
+/* ---------- shared card ---------- */
+.card{background:var(--card);border:1px solid var(--rule);border-radius:2px;
+  box-shadow:3px 3px 0 rgba(22,33,26,.07)}
+.chip{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 8px;border:1px solid currentColor;border-radius:2px}
+.c1{color:var(--d1)} .c2{color:var(--d2)} .c3{color:var(--d3)}
+
+/* ---------- drill ---------- */
+#drill{padding-top:26px}
+.meter{display:flex;gap:6px;margin:0 0 22px;align-items:flex-end}
+.mcol{flex:1}
+.mbar{height:6px;background:var(--rule2);border-radius:1px;overflow:hidden}
+.mbar i{display:block;height:100%;width:0;transition:width .45s cubic-bezier(.2,.7,.3,1)}
+.mlab{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);
+  margin-top:6px;display:flex;justify-content:space-between;gap:8px}
+.mlab b{color:var(--ink);font-weight:600}
+
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:14px 22px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
+.count{font-family:var(--mono);font-size:11.5px;color:var(--ink2);letter-spacing:.05em}
+.stem{font-size:19.5px;line-height:1.5;padding:26px 22px 6px;margin:0;max-width:60ch}
+.stem mark{background:none;color:inherit;padding:0 1px;
+  box-shadow:inset 0 -0.42em 0 rgba(184,134,11,0);transition:box-shadow .5s ease .1s}
+.revealed .stem mark{box-shadow:inset 0 -0.42em 0 rgba(184,134,11,.32);font-weight:600}
+.ask{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);
+  padding:16px 22px 10px}
+.opts{list-style:none;margin:0;padding:0 22px 22px;display:grid;gap:8px}
+.opt{width:100%;text-align:left;font:inherit;font-size:16px;background:#fff;border:1px solid var(--rule);
+  border-radius:2px;padding:13px 15px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;
+  transition:border-color .15s,background .15s,opacity .3s}
+.opt:hover{border-color:var(--forest);background:#fdfefa}
+.opt:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
+.opt .k{font-family:var(--mono);font-size:12px;color:var(--ink2);padding-top:2px;flex:none;width:14px}
+.opt .body{flex:1;min-width:0}
+.opt .t{display:block}
+.revealed .opt{cursor:default;pointer-events:none}
+.opt.no{opacity:.72;border-style:dashed;background:transparent}
+.opt.no .t{text-decoration:line-through;text-decoration-color:var(--rust);text-decoration-thickness:1px;color:var(--ink2)}
+.opt.yes{border-color:var(--forest);border-width:2px;background:#F3F8EE}
+.opt.picked{box-shadow:0 0 0 3px rgba(31,78,121,.18)}
+.kill{display:block;font-family:var(--mono);font-size:12.5px;line-height:1.5;margin-top:7px;color:var(--rust)}
+.kill b{color:var(--rust);font-weight:600}
+.win{display:block;font-size:14.5px;line-height:1.5;margin-top:7px;color:var(--forest)}
+.take{margin:0;padding:16px 22px 20px;border-top:1px solid var(--rule);background:#F2F4EA;
+  font-size:15px;display:flex;gap:12px}
+.take .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);
+  flex:none;padding-top:3px;width:64px}
+.bar{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}
+.btn{font:inherit;font-family:var(--disp);font-weight:600;font-size:15px;background:var(--forest);color:#fff;
+  border:0;border-radius:2px;padding:11px 22px;cursor:pointer}
+.btn:hover{background:#1F4223}
+.btn.ghost{background:none;color:var(--ink2);border:1px solid var(--rule);padding:10px 16px}
+.btn.ghost:hover{color:var(--ink);border-color:var(--ink2);background:none}
+.btn:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
+.hid{display:none}
+
+/* ---------- guide ---------- */
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:26px 0 16px}
+input[type=search]{font:inherit;font-size:15px;padding:10px 14px;border:1px solid var(--rule);border-radius:2px;
+  background:#fff;min-width:min(320px,100%);flex:1}
+input[type=search]:focus-visible{outline:2px solid var(--slate);outline-offset:0}
+.filt{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;background:none;
+  border:1px solid var(--rule);border-radius:2px;padding:9px 12px;cursor:pointer;color:var(--ink2)}
+.filt[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.filt:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
+.rows{display:grid;gap:0;border-top:1px solid var(--rule)}
+.row{display:grid;grid-template-columns:1.15fr 1fr;gap:0 26px;padding:15px 4px;border-bottom:1px solid var(--rule2);
+  align-items:start}
+.row .when{font-size:15.5px}
+.row .when .tag{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:4px}
+.row .pick{font-family:var(--mono);font-size:14px;line-height:1.5;color:var(--forest);font-weight:600}
+.row .not{display:block;font-family:var(--body);font-size:13.5px;color:var(--ink2);font-weight:400;margin-top:4px}
+.empty{padding:40px 4px;color:var(--ink2);font-size:15px}
+
+/* ---------- pairs ---------- */
+.pairs{display:grid;gap:16px;margin-top:26px}
+.pair{padding:20px 22px}
+.pair h3{font-family:var(--disp);font-weight:600;font-size:20px;letter-spacing:-.01em;margin:0 0 4px}
+.pair .sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin:0 0 16px}
+.sides{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin-bottom:16px}
+.side{border-left:3px solid var(--rule);padding-left:13px}
+.side:nth-child(1){border-color:var(--slate)} .side:nth-child(2){border-color:var(--forest)}
+.side:nth-child(3){border-color:var(--gold)} .side:nth-child(4){border-color:var(--rust)}
+.side .n{font-family:var(--mono);font-size:13.5px;font-weight:600;display:block;margin-bottom:3px}
+.side .p{font-size:14.5px;color:var(--ink2);margin:0}
+.line{border-top:1px solid var(--rule);padding-top:14px;font-size:15.5px}
+.line .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);
+  display:block;margin-bottom:3px}
+.trap{margin-top:12px;font-size:14.5px;color:var(--rust)}
+.trap .lbl{color:var(--rust);opacity:.75}
+
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-size:13.5px;color:var(--ink2);max-width:64ch}
+footer a{color:var(--forest)}
+footer p{margin:0 0 8px}
+
+@media (max-width:640px){
+  .row{grid-template-columns:1fr;gap:8px}
+  .take{flex-direction:column;gap:6px}
+  .take .lbl{width:auto}
+  .stem{font-size:18px;padding-left:18px;padding-right:18px}
+  .opts,.qhead,.ask,.take{padding-left:18px;padding-right:18px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Exam DP-700 · Fabric Data Engineer Associate</p>
+  <h1>Fabric<br>Decision <em>Desk</em></h1>
+  <p class="thesis">DP-700 rarely asks what a Fabric item <i>is</i>. It gives you four items that all nearly work and one clause in the scenario that rules three of them out. <b>This drills the clause, not the definition.</b></p>
+</header>
+
+<nav role="tablist" aria-label="Study modes">
+  <button role="tab" id="t-drill" aria-controls="drill" aria-selected="true">Drill</button>
+  <button role="tab" id="t-guide" aria-controls="guide" aria-selected="false">Decision guide</button>
+  <button role="tab" id="t-pairs" aria-controls="pairs" aria-selected="false">Lookalikes</button>
+</nav>
+<p class="tabnote" id="tabnote"></p>
+
+<!-- ============ DRILL ============ -->
+<section id="drill" role="tabpanel" aria-labelledby="t-drill">
+  <div class="meter" id="meter"></div>
+  <div class="card" id="qcard"></div>
+  <div class="bar">
+    <button class="btn hid" id="next">Next scenario</button>
+    <button class="btn ghost" id="skip">Skip</button>
+    <button class="btn ghost" id="reset">Reset score</button>
+  </div>
+</section>
+
+<!-- ============ GUIDE ============ -->
+<section id="guide" role="tabpanel" aria-labelledby="t-guide" hidden>
+  <div class="tools">
+    <input type="search" id="q" placeholder="Search a trigger phrase — try “near real time”, “no code”, “small files”" aria-label="Search decision rules">
+    <button class="filt" data-d="1" aria-pressed="false">Implement</button>
+    <button class="filt" data-d="2" aria-pressed="false">Ingest</button>
+    <button class="filt" data-d="3" aria-pressed="false">Monitor</button>
+  </div>
+  <div class="rows" id="rows"></div>
+</section>
+
+<!-- ============ PAIRS ============ -->
+<section id="pairs" role="tabpanel" aria-labelledby="t-pairs" hidden>
+  <div class="pairs" id="pairlist"></div>
+</section>
+
+<footer>
+  <p><b>Sample content only.</b> Every scenario here is invented — no real customer data, no exam material. The rules are written from the public Microsoft Learn documentation and the DP-700 skills-measured outline.</p>
+  <p>Fabric ships changes monthly and the skills-measured document is revised a few times a year. Check anything here against the <a href="https://learn.microsoft.com/en-gb/credentials/certifications/resources/study-guides/dp-700">official DP-700 study guide</a> before you trust it on exam day.</p>
+  <p style="font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;margin-top:14px">Built for the Fabric community certification-prep contest · content lives in one <code>DATA</code> object — fork it and add your own misses.</p>
+</footer>
+
+</div>
+
+<script>
+/* ------------------------------------------------------------------
+   All study content lives here. Add your own items to any of the three
+   arrays and the app picks them up — no other code changes needed.
+   d: 1 = Implement & manage | 2 = Ingest & transform | 3 = Monitor & optimise
+------------------------------------------------------------------- */
+const DOMAINS = {
+  1:{name:"Implement & manage", short:"Implement", cls:"c1", css:"var(--d1)"},
+  2:{name:"Ingest & transform", short:"Ingest",    cls:"c2", css:"var(--d2)"},
+  3:{name:"Monitor & optimise", short:"Monitor",   cls:"c3", css:"var(--d3)"}
+};
+
+const DRILL = [
+{d:2,
+ stem:"Sales data in an Azure SQL Database must be queryable in OneLake with under a minute of lag. The team has no capacity to write or maintain transformation code.",
+ trig:["under a minute of lag","no capacity to write or maintain transformation code"],
+ ask:"What do you set up?",
+ opts:[
+  {t:"Mirroring for the Azure SQL Database", ok:true, why:"Continuous replication into OneLake as Delta, configured rather than coded, and an operational database is exactly what mirroring targets."},
+  {t:"A Dataflow Gen2 on a scheduled refresh", kill:"under a minute of lag", note:"Scheduled refresh is batch. It cannot hold sub-minute freshness, and it burns capacity on every run."},
+  {t:"A pipeline Copy activity every 15 minutes", kill:"under a minute of lag", note:"The schedule itself is the answer to the wrong question."},
+  {t:"A OneLake shortcut to the Azure SQL Database", kill:"Azure SQL Database", note:"Shortcuts point at lake storage and other OneLake items — ADLS Gen2, S3, GCS, Dataverse — not at an operational SQL database."}
+ ],
+ take:"Operational database + near-real-time + no code to maintain is the mirroring fingerprint. Say “shortcut” only when the source is already files in a lake."},
+
+{d:2,
+ stem:"Parquet files sit in an ADLS Gen2 container owned by another team, who keep updating them. You need to query them from your lakehouse without holding a second copy of the storage.",
+ trig:["without holding a second copy"],
+ ask:"What do you create?",
+ opts:[
+  {t:"A OneLake shortcut to the ADLS Gen2 path", ok:true, why:"A shortcut references data in place. Nothing is copied, nothing needs syncing, and the other team stays the source of truth."},
+  {t:"A Copy activity into the lakehouse Files area", kill:"without holding a second copy", note:"Copying is precisely what the requirement forbids, and it goes stale the moment the other team writes again."},
+  {t:"Mirroring the storage account", kill:"ADLS Gen2", note:"Mirroring replicates operational databases, not blob storage."},
+  {t:"A Dataflow Gen2 loading them into a Delta table", kill:"without holding a second copy", note:"Also a copy, with a refresh schedule attached."}
+ ],
+ take:"“Without duplicating” and “the source keeps changing” both point at a shortcut. Copy only when you need to transform on the way in."},
+
+{d:2,
+ stem:"Devices publish telemetry to an Event Hub. Analysts need a live tile showing a rolling count per device, and want to run ad-hoc KQL over ninety days of history.",
+ trig:["live tile","ad-hoc KQL"],
+ ask:"Which landing pattern fits?",
+ opts:[
+  {t:"An eventstream into an eventhouse KQL database", ok:true, why:"Eventstream handles the continuous ingestion, and an eventhouse is built for high-volume append-only telemetry queried in KQL with sub-second response."},
+  {t:"A pipeline copying from Event Hub into a warehouse every five minutes", kill:"live tile", note:"Five-minute batches are not live, and a warehouse is not the right shape for high-frequency append-only events."},
+  {t:"A Dataflow Gen2 refreshing on a schedule", kill:"live tile", note:"Dataflows are batch-only. Streaming sources are not a Dataflow Gen2 job."},
+  {t:"A Spark structured-streaming notebook writing Delta", kill:"ad-hoc KQL", note:"Technically it streams, but you would be running a cluster continuously and the analysts asked for KQL."}
+ ],
+ take:"Streaming + KQL + sub-second reads is the eventhouse signature. Eventstream is the pipe, eventhouse is the destination."},
+
+{d:2,
+ stem:"A Dataflow Gen2 reads forty million rows from Azure SQL, adds a custom column with an M function, then filters to the last thirty days. It runs for over an hour. In the query steps, the native query indicator is greyed out from the custom-column step onward.",
+ trig:["native query indicator is greyed out"],
+ ask:"What do you change first?",
+ opts:[
+  {t:"Move the date filter above the custom column", ok:true, why:"Query folding breaks at the first step that cannot translate to source SQL. Filtering while folding still works means the source returns thirty days, not forty million rows."},
+  {t:"Enable staging on the query", kill:"greyed out", note:"Staging changes where the work lands, not the fact that all forty million rows are being pulled across first."},
+  {t:"Move it to a larger capacity", kill:"greyed out", note:"Buying compute to run a query that should never have been sent is the trap in every folding question."},
+  {t:"Turn on Fast Copy", kill:"custom column", note:"Fast Copy helps bulk movement, but it does not apply once you have a non-foldable transformation in the chain."}
+ ],
+ take:"Greyed-out native query means folding stopped. The fix is always reordering so filters fold, never more hardware."},
+
+{d:2,
+ stem:"A nightly pipeline copies an entire 500 GB source table into a lakehouse. About 0.2% of rows change each day, and the source table has a reliable LastModified column.",
+ trig:["0.2% of rows change","LastModified column"],
+ ask:"How do you rework it?",
+ opts:[
+  {t:"A Copy job configured for incremental copy on LastModified", ok:true, why:"Copy job handles watermark tracking as a first-class setting rather than pipeline plumbing you have to build and maintain."},
+  {t:"The same Copy activity with more data integration units", kill:"0.2% of rows change", note:"Moving 500 GB faster is still moving 500 GB you did not need."},
+  {t:"A Dataflow Gen2 with Fast Copy enabled", kill:"0.2% of rows change", note:"Still a full load. Fast Copy is about throughput, not about reading less."},
+  {t:"Mirroring the source", kill:"LastModified column", note:"Plausible if the source is a supported operational database, but the stem hands you a watermark column, which is the incremental-copy tell."}
+ ],
+ take:"A named modified-date or ID column in the stem is there for one reason: it is the watermark, and the answer is incremental."},
+
+{d:2,
+ stem:"A Spark notebook loads a daily file that contains both new customers and edits to existing ones. The target Delta table must end up with one row per customer.",
+ trig:["one row per customer"],
+ ask:"Which write pattern?",
+ opts:[
+  {t:"A Delta MERGE on the customer key", ok:true, why:"Insert-or-update in one atomic operation, and it is idempotent — a rerun of the same file leaves the table unchanged."},
+  {t:"Append, then delete duplicates afterwards", kill:"one row per customer", note:"It gets there eventually, but through a window where the table is wrong, and it rewrites far more than it needs to."},
+  {t:"Overwrite the whole table each day", kill:"edits to existing ones", note:"Only correct if the daily file is a full snapshot. It is not — it holds new and changed rows."},
+  {t:"Append with a partition overwrite", kill:"one row per customer", note:"Edits to a customer in an older partition would leave two live rows."}
+ ],
+ take:"“Repeated runs must be safe” and “one row per key” both mean MERGE. Never INSERT into a table a pipeline may retry."},
+
+{d:2,
+ stem:"A transformation needs a Python library for geospatial matching and runs across 200 GB of raw files. The team is comfortable writing code.",
+ trig:["Python library","200 GB"],
+ ask:"Where does this transformation belong?",
+ opts:[
+  {t:"A Spark notebook in the lakehouse", ok:true, why:"Arbitrary Python libraries and distributed processing over large file volumes are exactly the notebook's remit."},
+  {t:"A Dataflow Gen2", kill:"Python library", note:"Power Query M cannot call an arbitrary Python package, and 200 GB is past where a dataflow is the sensible tool."},
+  {t:"A warehouse stored procedure", kill:"Python library", note:"T-SQL only, and the data has not landed in a warehouse yet."},
+  {t:"A pipeline Copy activity with a mapping", kill:"geospatial matching", note:"Copy moves data and does light mapping. It does not do logic."}
+ ],
+ take:"Custom library, unusual algorithm, or genuinely large volumes → notebook. Connector variety and simple shaping → dataflow. Pure movement → copy."},
+
+{d:2,
+ stem:"An eventstream must produce, for each sensor, a count over the previous five minutes, emitted once every minute.",
+ trig:["previous five minutes","once every minute"],
+ ask:"Which window?",
+ opts:[
+  {t:"Hopping window, five-minute size with a one-minute hop", ok:true, why:"Two separate numbers in the stem — a window length and a reporting frequency — is the definition of a hopping window."},
+  {t:"Tumbling window of five minutes", kill:"once every minute", note:"Tumbling windows do not overlap, so they would emit every five minutes, not every minute."},
+  {t:"Sliding window of five minutes", kill:"once every minute", note:"A sliding window emits when an event enters or leaves, so output is event-driven, not on a clock."},
+  {t:"Session window with a five-minute gap", kill:"once every minute", note:"Session windows group bursts of activity separated by idle time. Nothing in the stem mentions idleness."}
+ ],
+ take:"One duration in the stem → tumbling. Two durations → hopping. “When activity stops” → session. “Every time an event arrives” → sliding."},
+
+{d:1,
+ stem:"Developers must work on features in isolation, and every change must be reviewed by a second person before it reaches the shared development workspace.",
+ trig:["isolation","reviewed by a second person"],
+ ask:"What do you put in place?",
+ opts:[
+  {t:"Git integration, with each developer on a feature branch and pull requests into the dev branch", ok:true, why:"Branching gives the isolation and the pull request gives the review gate. Neither exists outside source control."},
+  {t:"A deployment pipeline from dev to test to production", kill:"reviewed by a second person", note:"Deployment pipelines promote finished content between stages. They have no concept of a branch or a code review."},
+  {t:"Workspace roles limiting who can edit items", kill:"isolation", note:"Permissions decide who may change something, not whether the change was reviewed."},
+  {t:"Separate workspaces per developer with manual export and import", kill:"reviewed by a second person", note:"Isolation without review, and no history of what changed."}
+ ],
+ take:"Branches, history, review → Git. Moving approved content between stages → deployment pipeline. Real projects use both, so read what the stem is actually asking for."},
+
+{d:1,
+ stem:"A semantic model is promoted from the test workspace to production. In production it must read from the production lakehouse rather than the test one, without anyone editing it by hand after each deployment.",
+ trig:["without anyone editing it by hand"],
+ ask:"What do you configure?",
+ opts:[
+  {t:"A deployment rule on the production stage of the deployment pipeline", ok:true, why:"Deployment rules rebind data sources and parameters as content lands in a stage, so the swap happens on every deployment automatically."},
+  {t:"A second copy of the model pointing at production", kill:"without anyone editing it by hand", note:"Two models now drift apart, and the deployment stops being a deployment."},
+  {t:"Change the connection after each deployment", kill:"without anyone editing it by hand", note:"The stem rules this out in as many words."},
+  {t:"Merge a production branch in Git with different settings", kill:"promoted from the test workspace to production", note:"Workable in a code-first setup, but the stem is describing stage promotion, and rules are the built-in answer."}
+ ],
+ take:"“Different connection per stage, no manual step” is a deployment rule. Variable libraries are the newer way to hold those values in one place — check which one your study guide edition names."},
+
+{d:1,
+ stem:"Analysts querying a warehouse table must see only the rows for their own region, decided by the account they signed in with.",
+ trig:["only the rows","account they signed in with"],
+ ask:"What do you implement?",
+ opts:[
+  {t:"Row-level security: a predicate function on the user's identity, bound by a security policy", ok:true, why:"RLS filters rows per user at query time, and reading the caller's identity is what the predicate function is for."},
+  {t:"Dynamic data masking on the region column", kill:"only the rows", note:"Masking changes how a value is displayed. Every row is still returned."},
+  {t:"Column-level security on the region column", kill:"only the rows", note:"Column security removes a column for everyone denied it. It cannot vary rows by user."},
+  {t:"Give each analyst the Viewer role on the workspace", kill:"only the rows", note:"Workspace roles are all-or-nothing on the item. There is no row concept in them."}
+ ],
+ take:"Rows vary by who is asking → RLS. Whole column hidden → CLS. Value obscured but still there → masking. Whole object hidden → object-level security."},
+
+{d:1,
+ stem:"A salary column must be unavailable to a support group. If they include it in a query, the query should fail rather than return anything at all.",
+ trig:["query should fail"],
+ ask:"Which control?",
+ opts:[
+  {t:"Column-level security — DENY SELECT on the column", ok:true, why:"A denied column makes the query error. That hard failure is the distinguishing behaviour."},
+  {t:"Dynamic data masking on the column", kill:"query should fail", note:"Masking returns a value, just an obscured one. It is presentation, not a boundary, and anyone can still filter on the real value to infer it."},
+  {t:"Row-level security on the employee table", kill:"salary column", note:"RLS removes rows, not columns."},
+  {t:"A sensitivity label of Highly Confidential", kill:"query should fail", note:"Labels classify and can drive downstream protection, but they do not block a SELECT."}
+ ],
+ take:"If a question ever says a user must not be able to infer a value, masking is wrong. Masking is for shoulder-surfing, not for security."},
+
+{d:1,
+ stem:"A contractor must read one folder of a lakehouse — and only that folder — including from a Spark notebook. They already have Viewer on the workspace.",
+ trig:["only that folder","from a Spark notebook"],
+ ask:"What do you use?",
+ opts:[
+  {t:"A OneLake data access role scoped to that folder", ok:true, why:"OneLake data access roles are the only control that applies at folder level and holds when the data is read directly through Spark rather than through the SQL endpoint."},
+  {t:"Row-level security on the SQL analytics endpoint", kill:"from a Spark notebook", note:"The classic trap. SQL-layer security is enforced by the SQL engine, and Spark reads the Delta files underneath it."},
+  {t:"Item-level sharing on the lakehouse", kill:"only that folder", note:"Sharing an item grants the item. It has no folder granularity."},
+  {t:"Upgrade them to Contributor on the workspace", kill:"only that folder", note:"Wrong direction entirely — that widens access and adds write."}
+ ],
+ take:"Whenever a question mentions Spark or OneLake file access alongside a security rule, SQL-layer answers are dead. Look for OneLake data access roles."},
+
+{d:1,
+ stem:"A team member must be able to create and run pipelines and notebooks in a workspace, but must not be able to add other people to it.",
+ trig:["must not be able to add other people"],
+ ask:"Which workspace role?",
+ opts:[
+  {t:"Contributor", ok:true, why:"Contributors create, edit and run items. Managing access starts at Member."},
+  {t:"Member", kill:"must not be able to add other people", note:"Members can add others, up to their own level. That single ability is the whole question."},
+  {t:"Viewer", kill:"create and run pipelines", note:"Viewers read finished content. They cannot author or execute."},
+  {t:"Admin", kill:"must not be able to add other people", note:"Everything Member can do, plus deleting the workspace."}
+ ],
+ take:"Walk the ladder by what each role adds: Viewer reads, Contributor builds, Member invites, Admin deletes. Pick the lowest rung that covers the stem."},
+
+{d:1,
+ stem:"A finance semantic model should carry the organisation's strongest quality signal, and only a small governance group may apply it.",
+ trig:["strongest quality signal","only a small governance group"],
+ ask:"What is applied?",
+ opts:[
+  {t:"Certification, restricted to the governance group in the tenant setting", ok:true, why:"Certification is the higher endorsement and is deliberately gated to a named group by an admin."},
+  {t:"Promotion", kill:"only a small governance group", note:"Anyone with write access to the item can promote. There is no gate, which is exactly why it is the weaker signal."},
+  {t:"A sensitivity label", kill:"strongest quality signal", note:"Labels describe confidentiality, not trustworthiness."},
+  {t:"Adding it to a domain", kill:"strongest quality signal", note:"Domains organise ownership across the tenant. They say nothing about quality."}
+ ],
+ take:"Two endorsement levels, one difference: promotion is self-service, certification is gated. Any mention of an approved group means certification."},
+
+{d:3,
+ stem:"A Direct Lake semantic model was performing well. After a change to the lakehouse, users notice queries have become slower and the model is reported as falling back to DirectQuery.",
+ trig:["falling back to DirectQuery"],
+ ask:"Which change would explain it?",
+ opts:[
+  {t:"The model now reads a view on the SQL analytics endpoint instead of the Delta table", ok:true, why:"Direct Lake reads Delta files directly. A view has to be resolved by the SQL engine, so the model cannot use Direct Lake and falls back."},
+  {t:"OPTIMIZE was run on the table", kill:"falling back", note:"Compaction helps Direct Lake. Fewer, larger files is the state you want."},
+  {t:"V-Order was enabled on writes", kill:"falling back", note:"V-Order is a write-time optimisation specifically for this read path."},
+  {t:"The semantic model was reframed after a load", kill:"falling back", note:"Reframing is the normal mechanism by which Direct Lake picks up new data."}
+ ],
+ take:"Fallback causes worth memorising: views instead of tables, unsupported types or features, and exceeding the row or size guardrail for your SKU."},
+
+{d:3,
+ stem:"A Delta table written by an hourly job has accumulated roughly forty thousand files, most under a megabyte. Reads have got steadily slower.",
+ trig:["forty thousand files, most under a megabyte"],
+ ask:"What do you run?",
+ opts:[
+  {t:"OPTIMIZE, to compact the small files", ok:true, why:"Bin-compaction rewrites many small files into fewer large ones, which is the direct cure for the small-file problem."},
+  {t:"VACUUM, to clear the files out", kill:"most under a megabyte", note:"VACUUM deletes files no longer referenced by the log. The forty thousand small files are all live, so it removes none of them."},
+  {t:"Z-ORDER on the key column", kill:"forty thousand files", note:"Z-Order co-locates values to help selective filters. It is the right answer to a different symptom."},
+  {t:"Move to a larger Spark pool", kill:"forty thousand files", note:"More compute reading the same forty thousand file handles."}
+ ],
+ take:"Small files → OPTIMIZE. Storage cost from old versions → VACUUM. Filters on one high-cardinality column scanning everything → Z-Order. Slow reads in Power BI → V-Order at write time."},
+
+{d:3,
+ stem:"Storage costs are rising from old Delta table versions. The team still needs to be able to time-travel back seven days.",
+ trig:["time-travel back seven days"],
+ ask:"What do you do?",
+ opts:[
+  {t:"Run VACUUM with a retention of seven days", ok:true, why:"VACUUM removes unreferenced files older than the retention you give it, so setting retention to match the time-travel requirement satisfies both."},
+  {t:"Run VACUUM with zero retention", kill:"time-travel back seven days", note:"It reclaims the most space and destroys every earlier version. This is the trap answer in almost every VACUUM question."},
+  {t:"Run OPTIMIZE on the table", kill:"Storage costs", note:"Compaction actually adds files in the short term — the old ones stay until vacuumed."},
+  {t:"Drop and reload the table", kill:"time-travel back seven days", note:"History gone, and a large unnecessary rewrite."}
+ ],
+ take:"OPTIMIZE and VACUUM are a pair: compact first, then reclaim — and never set retention below the time travel you promised someone."},
+
+{d:3,
+ stem:"An eventhouse table holds a year of telemetry. Queries against the last three days have become slow, and the team wants them fast again without losing any history.",
+ trig:["last three days","without losing any history"],
+ ask:"Which policy do you change?",
+ opts:[
+  {t:"Raise the caching policy so three days sit in hot cache", ok:true, why:"The caching policy decides how much recent data is held on SSD for fast access. Everything outside it still exists, just on colder storage."},
+  {t:"Reduce the retention policy to three days", kill:"without losing any history", note:"That deletes the other 362 days. Retention is about existence, not speed."},
+  {t:"Add a materialized view over the table", kill:"last three days", note:"Useful for repeated aggregations, but it does not address where the raw recent data is stored."},
+  {t:"Change the partitioning policy", kill:"last three days", note:"A heavier intervention aimed at very large tables, and not the tool for recency."}
+ ],
+ take:"Retention is how long data exists. Caching is how much of it is fast. Exam questions swap these deliberately."},
+
+{d:3,
+ stem:"Reports slow down every afternoon. You need to know which items are consuming the capacity and whether any throttling has occurred.",
+ trig:["consuming the capacity","throttling"],
+ ask:"Where do you look?",
+ opts:[
+  {t:"The Microsoft Fabric Capacity Metrics app", ok:true, why:"It is the only surface that reports capacity unit consumption per item over time, along with smoothing, overages and throttling."},
+  {t:"The Monitoring hub", kill:"throttling", note:"It shows run history and durations for pipelines, notebooks and dataflows — useful, but it says nothing about CU consumption."},
+  {t:"Workspace settings", kill:"consuming the capacity", note:"Configuration, not telemetry."},
+  {t:"Each semantic model's refresh history", kill:"which items", note:"One item at a time, and only refreshes."}
+ ],
+ take:"Capacity units and throttling → Capacity Metrics app. Did my job run and how long did it take → Monitoring hub. Two different questions."},
+
+{d:3,
+ stem:"The operations team should be told in Teams whenever daily returns exceed 5% of orders, based on a measure in an existing semantic model.",
+ trig:["whenever daily returns exceed 5%"],
+ ask:"What do you build?",
+ opts:[
+  {t:"An Activator rule watching that measure, with a Teams action", ok:true, why:"Activator is the item for conditions on data values, and it triggers actions such as Teams messages or Power Automate flows when the condition is met."},
+  {t:"An Outlook activity on the pipeline's failure path", kill:"returns exceed 5%", note:"That fires on job status. Nothing in it can look at a business measure."},
+  {t:"A report subscription delivered daily", kill:"whenever", note:"A subscription arrives on a schedule whether or not anything happened."},
+  {t:"An alert in the Monitoring hub", kill:"returns exceed 5%", note:"The Monitoring hub is about the health of runs, not the content of data."}
+ ],
+ take:"Condition on the data → Activator. Condition on a job → pipeline failure path or the Monitoring hub. Read the stem for which one is being watched."},
+
+{d:3,
+ stem:"A notebook overwrote a Delta table with bad data an hour ago. The correct data existed in the previous version.",
+ trig:["previous version"],
+ ask:"Fastest correct recovery?",
+ opts:[
+  {t:"RESTORE the table to the previous Delta version", ok:true, why:"Delta keeps the earlier version in the log until it is vacuumed away, and restoring is a metadata operation."},
+  {t:"Re-run the whole ingestion pipeline from source", kill:"previous version", note:"It might work, it is far slower, and it assumes the source has not moved on."},
+  {t:"Run VACUUM and reload", kill:"previous version", note:"VACUUM is what destroys the version you are trying to get back."},
+  {t:"Restore the workspace from a backup", kill:"previous version", note:"Reaching for a platform-level answer when the table itself holds the fix."}
+ ],
+ take:"Delta time travel is the first recovery answer for a lakehouse table — and the reason a careless VACUUM is dangerous."},
+
+{d:3,
+ stem:"A warehouse query on a recently loaded table is slow. The plan shows the optimiser expecting a few hundred rows where there are several million.",
+ trig:["expecting a few hundred rows where there are several million"],
+ ask:"What is the fix?",
+ opts:[
+  {t:"Create or update statistics on the columns involved", ok:true, why:"Row estimates that are wrong by orders of magnitude are a statistics problem, and the optimiser makes bad join and memory choices from them."},
+  {t:"Add a clustered index to the table", kill:"warehouse", note:"Fabric warehouse does not offer the index model you would reach for in SQL Server."},
+  {t:"Scale the capacity up", kill:"expecting a few hundred rows", note:"A bigger engine still executing a badly chosen plan."},
+  {t:"Rewrite the query with hints", kill:"expecting a few hundred rows", note:"Forcing a plan around a bad estimate, rather than fixing the estimate."}
+ ],
+ take:"A stated gap between estimated and actual rows always means statistics. It is the one warehouse tuning lever the exam leans on."},
+
+{d:3,
+ stem:"Each notebook run in a scheduled job spends around three minutes before any code executes. The workspace uses a custom Spark pool.",
+ trig:["three minutes before any code executes","custom Spark pool"],
+ ask:"What reduces the delay?",
+ opts:[
+  {t:"Use the starter pool, which keeps nodes pre-warmed", ok:true, why:"Starter pools hold ready sessions, so start-up is near-instant. Custom pools have to allocate nodes each time."},
+  {t:"Increase the node size on the custom pool", kill:"before any code executes", note:"Bigger nodes still have to be provisioned, and the delay is provisioning."},
+  {t:"Enable autotune", kill:"before any code executes", note:"Autotune adjusts Spark configuration for the workload once it is running."},
+  {t:"Enable V-Order on writes", kill:"before any code executes", note:"A write-time optimisation for downstream reads. Unrelated to session start."}
+ ],
+ take:"Split every Spark performance question into start-up time and run time. Start-up → starter pool or high-concurrency session sharing. Run time → pool size, autotune, file layout."},
+
+{d:2,
+ stem:"A pipeline must run the same notebook once for every file that arrived in a folder overnight, and the file count varies each night.",
+ trig:["once for every file","count varies"],
+ ask:"How do you build it?",
+ opts:[
+  {t:"Get Metadata to list the folder, then ForEach over the child items calling the notebook", ok:true, why:"ForEach iterates a collection of unknown length, and Get Metadata is how you produce that collection."},
+  {t:"An Until activity with a counter", kill:"count varies", note:"Until repeats while a condition holds. You would be reimplementing iteration and maintaining the counter yourself."},
+  {t:"A Switch activity on the file name", kill:"count varies", note:"Switch branches on a known set of values, not an arbitrary list."},
+  {t:"A Copy activity with a wildcard path", kill:"run the same notebook", note:"That handles the files, but never invokes the notebook the stem asked for."}
+ ],
+ take:"Unknown number of things → Get Metadata plus ForEach. Known branches → Switch. Wait for a state → Until."},
+
+{d:1,
+ stem:"Finance and Operations each need their own workspaces, but the whole organisation should be able to find and govern their content as two clearly separated areas of ownership.",
+ trig:["two clearly separated areas of ownership"],
+ ask:"What do you set up?",
+ opts:[
+  {t:"Two domains, with the relevant workspaces assigned to each", ok:true, why:"Domains group workspaces into business areas for discovery and delegated governance, with their own admins and settings."},
+  {t:"One workspace with folders for each team", kill:"their own workspaces", note:"The stem already says separate workspaces are wanted."},
+  {t:"Two capacities", kill:"find and govern", note:"Capacity is about compute and billing isolation, not about how content is organised or discovered."},
+  {t:"Endorsement on each team's items", kill:"two clearly separated areas of ownership", note:"Endorsement marks quality item by item. It does not create a structure."}
+ ],
+ take:"Domain is a governance and discovery grouping. Capacity is compute. Workspace is the unit of collaboration and permissions. Questions blur them on purpose."},
+
+{d:2,
+ stem:"Raw ingested rows must be cleaned and reshaped the moment they land in an eventhouse table, and the cleaned version must be queried by analysts.",
+ trig:["the moment they land"],
+ ask:"Which eventhouse feature?",
+ opts:[
+  {t:"An update policy on the target table", ok:true, why:"Update policies run a query over each newly ingested batch and write the result into another table, so the transformation happens at ingestion."},
+  {t:"A materialized view", kill:"the moment they land", note:"Materialized views maintain an aggregate over a source table for querying. They are not an ingestion-time transformation."},
+  {t:"A stored function called by analysts", kill:"the moment they land", note:"That transforms at query time, repeated on every read."},
+  {t:"A pipeline running every five minutes", kill:"the moment they land", note:"Batch again, and it duplicates machinery the eventhouse already has."}
+ ],
+ take:"Transform on ingestion → update policy. Keep an aggregate current for reads → materialized view."},
+
+{d:1,
+ stem:"A lakehouse in the Sales workspace holds a curated table. The Marketing workspace needs to build reports on that exact table, with no copy and no drift.",
+ trig:["no copy and no drift"],
+ ask:"What do you use?",
+ opts:[
+  {t:"A OneLake shortcut in the Marketing lakehouse pointing at the Sales table", ok:true, why:"Internal shortcuts work between workspaces in the same OneLake, so Marketing reads the single live table."},
+  {t:"A pipeline copying the table nightly", kill:"no copy and no drift", note:"Two copies is exactly the drift the requirement forbids."},
+  {t:"Give Marketing the Contributor role on the Sales workspace", kill:"Marketing workspace needs to build reports", note:"It solves access by handing over write permissions on someone else's workspace."},
+  {t:"Mirroring between the two workspaces", kill:"no copy", note:"Mirroring targets external operational databases, and it replicates rather than references."}
+ ],
+ take:"Shortcuts are as much a sharing pattern as an ingestion one. Cross-workspace reuse of a curated table is the everyday case."},
+
+{d:2,
+ stem:"A team wants a lakehouse table they can also write to with T-SQL INSERT and UPDATE statements, inside multi-statement transactions.",
+ trig:["write to with T-SQL","multi-statement transactions"],
+ ask:"Which item do they need?",
+ opts:[
+  {t:"A warehouse", ok:true, why:"The warehouse gives full read and write T-SQL with multi-table transactions. It is the only Fabric item that does."},
+  {t:"A lakehouse SQL analytics endpoint", kill:"write to with T-SQL", note:"The endpoint is read-only T-SQL over the lakehouse. This is the single most-tested distinction in the exam."},
+  {t:"An eventhouse KQL database", kill:"T-SQL", note:"KQL, and built for append-only telemetry."},
+  {t:"A lakehouse with a Spark notebook", kill:"write to with T-SQL", note:"Spark can write, but the stem is explicit that the writes are T-SQL."}
+ ],
+ take:"If the stem says T-SQL writes or transactions, it is a warehouse. If it says Spark, files, or unstructured data, it is a lakehouse. The SQL endpoint is read-only, always."},
+
+{d:3,
+ stem:"A pipeline with twelve activities failed at activity nine. The first eight are expensive and their output is still valid.",
+ trig:["first eight are expensive and their output is still valid"],
+ ask:"What do you do?",
+ opts:[
+  {t:"Rerun from the failed activity in the Monitoring hub", ok:true, why:"Fabric can restart a pipeline run from the point of failure, so the completed activities are not repeated."},
+  {t:"Rerun the whole pipeline", kill:"first eight are expensive", note:"Correct outcome, wasteful route — and the stem flags the cost to tell you so."},
+  {t:"Split it into two pipelines and run the second", kill:"still valid", note:"A refactor is not an incident response."},
+  {t:"Raise the retry count on activity nine", kill:"still valid", note:"Retries help with transient faults, but the run has already failed and needs resuming."}
+ ],
+ take:"The Monitoring hub is not only for reading history — rerunning from failure is one of the answers it holds."}
+];
+
+const GUIDE = [
+/* --- Implement & manage --- */
+{d:1,when:"Branching, pull requests, history of who changed what",pick:"Git integration",not:"not a deployment pipeline — those promote finished content, they have no branches"},
+{d:1,when:"Move approved content from dev to test to production",pick:"Deployment pipeline",not:"Git alone gives you no stage model"},
+{d:1,when:"Different connection or parameter value per stage, applied automatically",pick:"Deployment rule (or a variable library, in newer guidance)",not:"not a manual edit after each deployment"},
+{d:1,when:"Create and run items, but must not invite other people",pick:"Contributor",not:"Member is the rung where inviting starts"},
+{d:1,when:"Read finished reports only",pick:"Viewer",not:"Viewer cannot run a notebook or a pipeline"},
+{d:1,when:"Delete the workspace, change its capacity",pick:"Admin",not:"Member can do almost everything else"},
+{d:1,when:"Filter rows by who is asking",pick:"Row-level security",not:"masking still returns every row"},
+{d:1,when:"A whole column must be unavailable, query should fail",pick:"Column-level security (DENY)",not:"masking returns a value, so it is not a boundary"},
+{d:1,when:"Obscure a value on screen, no hard guarantee needed",pick:"Dynamic data masking",not:"never the answer when the stem says “must not infer”"},
+{d:1,when:"Hide an entire table or measure from a group",pick:"Object-level security",not:"RLS operates on rows, not objects"},
+{d:1,when:"Folder-level access inside a lakehouse, enforced for Spark",pick:"OneLake data access role",not:"SQL-endpoint security is bypassed when Spark reads the files"},
+{d:1,when:"Share one item without granting the workspace",pick:"Item permissions",not:"a workspace role grants everything in it"},
+{d:1,when:"Highest trust signal, and only an approved group may set it",pick:"Certification",not:"promotion is self-service, which is why it is weaker"},
+{d:1,when:"Group workspaces into business areas for discovery and delegated admin",pick:"Domains",not:"capacity is compute, not organisation"},
+{d:1,when:"Classify confidentiality and carry it downstream on export",pick:"Sensitivity label",not:"a label does not block a query"},
+{d:1,when:"Isolate one team's compute and billing",pick:"A separate capacity",not:"a separate workspace shares the same capacity unless reassigned"},
+
+/* --- Ingest & transform --- */
+{d:2,when:"Reference data in place, no copy, source keeps changing",pick:"OneLake shortcut",not:"copy activity duplicates and goes stale"},
+{d:2,when:"Near-real-time replica of an operational database, no code",pick:"Mirroring",not:"a shortcut cannot target an operational database"},
+{d:2,when:"Move bytes from A to B, no logic",pick:"Copy activity in a pipeline",not:"a dataflow adds machinery you do not need"},
+{d:2,when:"Incremental or change-based copy without building watermark plumbing",pick:"Copy job",not:"a Copy activity means you maintain the watermark yourself"},
+{d:2,when:"Low-code shaping, wide connector list, business-user maintainable",pick:"Dataflow Gen2",not:"a notebook shuts out the people who need to own it"},
+{d:2,when:"Custom Python library, ML, or genuinely large volumes",pick:"Spark notebook",not:"Power Query M cannot call an arbitrary package"},
+{d:2,when:"Transform after the data has landed in a warehouse",pick:"Stored procedure or T-SQL in a pipeline Script activity",not:"a dataflow would pull it out and put it back"},
+{d:2,when:"Native query greyed out, dataflow crawling",pick:"Reorder so filters fold before non-foldable steps",not:"more capacity does not un-break folding"},
+{d:2,when:"Bulk load speed in a dataflow, simple shaping only",pick:"Fast Copy",not:"it does not apply once folding is broken"},
+{d:2,when:"Insert new rows and update existing ones in one safe operation",pick:"MERGE",not:"INSERT is not safe to rerun"},
+{d:2,when:"Repeated deployments must leave the same result",pick:"Idempotent writes — MERGE, not INSERT",not:"append plus dedupe leaves a window where the table is wrong"},
+{d:2,when:"Continuous events from Event Hub, IoT Hub, Kafka",pick:"Eventstream",not:"a dataflow is batch-only"},
+{d:2,when:"High-volume append-only telemetry, sub-second queries, KQL",pick:"Eventhouse / KQL database",not:"a warehouse is the wrong shape for this"},
+{d:2,when:"T-SQL writes, multi-table transactions",pick:"Warehouse",not:"the lakehouse SQL analytics endpoint is read-only"},
+{d:2,when:"Files, unstructured data, Spark, medallion layers",pick:"Lakehouse",not:"a warehouse will not hold arbitrary files"},
+{d:2,when:"Fixed non-overlapping buckets",pick:"Tumbling window",not:"hopping overlaps"},
+{d:2,when:"A window length and a separate reporting frequency",pick:"Hopping window",not:"tumbling only emits once per window"},
+{d:2,when:"Emit as events enter and leave",pick:"Sliding window",not:"not clock-driven"},
+{d:2,when:"Group bursts separated by idle time",pick:"Session window",not:"only when the stem mentions inactivity"},
+{d:2,when:"Transform each batch as it is ingested into an eventhouse",pick:"Update policy",not:"a materialized view maintains an aggregate for reads"},
+{d:2,when:"Keep a running aggregate current for analysts",pick:"Materialized view",not:"an update policy fires on ingest, not on query"},
+{d:2,when:"Loop over an unknown number of files",pick:"Get Metadata + ForEach",not:"Until is for waiting on a condition"},
+{d:2,when:"Branch on a known set of values",pick:"Switch",not:"ForEach iterates, it does not branch"},
+{d:2,when:"Run another pipeline as a step",pick:"Invoke pipeline activity",not:"do not copy the child pipeline's activities in"},
+
+/* --- Monitor & optimise --- */
+{d:3,when:"Thousands of small files, reads slowing",pick:"OPTIMIZE",not:"VACUUM does not touch live files"},
+{d:3,when:"Storage cost from superseded versions",pick:"VACUUM, retention ≥ the time travel you promised",not:"never zero retention unless history is genuinely disposable"},
+{d:3,when:"Filters on one high-cardinality column scanning everything",pick:"Z-Order",not:"OPTIMIZE alone does not co-locate values"},
+{d:3,when:"Power BI reads from the lakehouse are slow",pick:"V-Order at write time",not:"a write-time setting, not something you run afterwards"},
+{d:3,when:"Direct Lake model dropping to DirectQuery",pick:"Check for views instead of tables, unsupported features, SKU guardrails",not:"OPTIMIZE and V-Order help, they do not cause fallback"},
+{d:3,when:"Session start is slow, before any code runs",pick:"Starter pool, or high-concurrency session sharing",not:"bigger nodes still have to be provisioned"},
+{d:3,when:"Job runs but is slow once started",pick:"Pool size, autotune, file layout",not:"start-up and run time are different questions"},
+{d:3,when:"Warehouse plan estimates rows wildly wrong",pick:"Create or update statistics",not:"there is no index rebuild to reach for here"},
+{d:3,when:"Recent-window queries slow in an eventhouse, keep all history",pick:"Raise the caching (hot cache) policy",not:"cutting retention deletes the history"},
+{d:3,when:"Data must stop being kept after a period",pick:"Retention policy",not:"caching is about speed, not existence"},
+{d:3,when:"Which item is burning capacity units, and did throttling happen",pick:"Capacity Metrics app",not:"the Monitoring hub has no CU view"},
+{d:3,when:"Did my pipeline run, how long, why did it fail",pick:"Monitoring hub",not:"Capacity Metrics will not show you an activity error"},
+{d:3,when:"Act when a data value crosses a threshold",pick:"Activator rule",not:"a pipeline failure path only sees job status"},
+{d:3,when:"Tell someone a pipeline failed",pick:"An Outlook or Teams activity on the failure dependency",not:"a subscription arrives whether or not anything happened"},
+{d:3,when:"Resume a long pipeline after a mid-run failure",pick:"Rerun from the failed activity",not:"rerunning the whole thing repeats the expensive part"},
+{d:3,when:"Bad write to a Delta table, good data in the last version",pick:"RESTORE via time travel",not:"VACUUM is what destroys that version"},
+{d:3,when:"Transient source errors during a copy",pick:"Retry count and interval on the activity",not:"retries will not fix a permanent failure"},
+{d:3,when:"A few malformed rows must not fail a large copy",pick:"Fault tolerance — skip incompatible rows and log them",not:"silently skipping without logging is never the answer"}
+];
+
+const PAIRS = [
+{d:2,t:"Shortcut vs Mirroring vs Copy",
+ sides:[
+  {n:"Shortcut",p:"References data where it already lives. No copy, no sync, no compute. Points at OneLake, ADLS Gen2, S3, GCS, Dataverse."},
+  {n:"Mirroring",p:"Continuously replicates an operational database into OneLake as Delta. Configured, not coded."},
+  {n:"Copy",p:"Moves bytes on a schedule you control, with light mapping. You own the freshness and the duplicate."}
+ ],
+ line:"Is the source already files in a lake, a live operational database, or something you need a scheduled point-in-time copy of?",
+ trap:"“Without duplicating storage” is a shortcut every time. “Near real time and no code” is mirroring every time."},
+
+{d:2,t:"Lakehouse vs Warehouse vs Eventhouse",
+ sides:[
+  {n:"Lakehouse",p:"Files and Delta tables. Spark writes. The SQL analytics endpoint over it is read-only T-SQL."},
+  {n:"Warehouse",p:"Full T-SQL read and write, multi-table transactions, cross-database queries."},
+  {n:"Eventhouse",p:"KQL over high-volume append-only telemetry. Sub-second queries, hot cache and retention policies."}
+ ],
+ line:"How is it written? Spark and files → lakehouse. T-SQL and transactions → warehouse. A firehose of events → eventhouse.",
+ trap:"The read-only SQL analytics endpoint is the most-tested fact in this group. If the stem says T-SQL INSERT or UPDATE, the lakehouse is out."},
+
+{d:2,t:"Dataflow Gen2 vs Notebook vs Copy activity vs Stored procedure",
+ sides:[
+  {n:"Dataflow Gen2",p:"Low-code M, wide connectors, foldable where the source allows. Owned by analysts as easily as engineers."},
+  {n:"Notebook",p:"Arbitrary Python or Scala, custom libraries, distributed processing over large volumes."},
+  {n:"Copy activity",p:"Movement with mapping. No logic."},
+  {n:"Stored procedure",p:"T-SQL transformation after the data has landed in a warehouse."}
+ ],
+ line:"Who maintains it, what language does the stem name, and has the data landed yet?",
+ trap:"“The business team must be able to maintain it” pushes you to a dataflow even when a notebook would be technically neater."},
+
+{d:1,t:"Git integration vs Deployment pipelines",
+ sides:[
+  {n:"Git integration",p:"Source control for a workspace. Branches, commits, pull requests, history, rollback to a commit."},
+  {n:"Deployment pipeline",p:"Promotes content between dev, test and production workspaces, with rules that rebind sources per stage."}
+ ],
+ line:"Git answers “what changed and who approved it”. Deployment pipelines answer “how does it get to production”.",
+ trap:"Real teams use both, so the stem will lean on one word: review and branch mean Git, promote and stage mean deployment pipeline."},
+
+{d:1,t:"Workspace role vs Item permission vs OneLake data access role",
+ sides:[
+  {n:"Workspace role",p:"Viewer, Contributor, Member, Admin. Applies to everything in the workspace."},
+  {n:"Item permission",p:"Shares a single item with someone who has no workspace role."},
+  {n:"OneLake data access role",p:"Folder-level RBAC inside a lakehouse. The only one of the three that constrains direct Spark and OneLake file access."}
+ ],
+ line:"How wide is the grant, and which engine is doing the reading?",
+ trap:"SQL-layer security — RLS, CLS, masking — is enforced by the SQL engine. A Spark notebook reads the Delta files beneath it and is unaffected."},
+
+{d:1,t:"RLS vs CLS vs Dynamic data masking vs OLS",
+ sides:[
+  {n:"Row-level security",p:"A predicate function filters rows per user. The user never knows the other rows exist."},
+  {n:"Column-level security",p:"DENY on a column. Including it makes the query fail."},
+  {n:"Dynamic data masking",p:"The value is returned obscured. A user with UNMASK sees it, and anyone can filter to infer it."},
+  {n:"Object-level security",p:"An entire table or measure disappears from the model."}
+ ],
+ line:"Rows, a column, the appearance of a value, or a whole object?",
+ trap:"Masking is presentation, not protection. Any stem containing “must not be able to determine” rules it out."},
+
+{d:3,t:"OPTIMIZE vs VACUUM vs V-Order vs Z-Order",
+ sides:[
+  {n:"OPTIMIZE",p:"Compacts many small files into fewer large ones. Cures the small-file problem."},
+  {n:"VACUUM",p:"Deletes files no longer referenced, older than the retention you set. Reclaims storage and ends time travel beyond that point."},
+  {n:"V-Order",p:"Write-time sorting and encoding that makes reads — especially Direct Lake — faster."},
+  {n:"Z-Order",p:"Co-locates rows by chosen columns so selective filters skip more files."}
+ ],
+ line:"Too many files, too much old storage, slow reads downstream, or slow filters on one column?",
+ trap:"VACUUM never fixes slow reads on live data, and OPTIMIZE never reduces storage in the short term. They are run in that order for a reason."},
+
+{d:3,t:"Direct Lake vs Import vs DirectQuery",
+ sides:[
+  {n:"Direct Lake",p:"Reads Delta files in OneLake directly. No refresh; new data is picked up by framing."},
+  {n:"Import",p:"Data copied into the model. Fastest queries, refresh schedule, memory bound."},
+  {n:"DirectQuery",p:"Every query goes to the source. Always current, slowest, and where Direct Lake lands when it falls back."}
+ ],
+ line:"Direct Lake is the default for lakehouse and warehouse data. Import when you need model features it cannot support.",
+ trap:"Know the fallback causes: a view instead of a table, unsupported features on the endpoint, and exceeding the row or size guardrail for the SKU."},
+
+{d:3,t:"Retention policy vs Caching policy (eventhouse)",
+ sides:[
+  {n:"Retention",p:"How long the data exists at all. Past it, the data is gone."},
+  {n:"Caching",p:"How much recent data is held on SSD for fast query. Past it, the data is still there, just colder."}
+ ],
+ line:"Existence versus speed.",
+ trap:"“Speed up the last seven days without losing history” is caching. Reducing retention to fix a performance problem deletes the archive."},
+
+{d:2,t:"Update policy vs Materialized view (KQL)",
+ sides:[
+  {n:"Update policy",p:"Runs a query over each ingested batch and writes the result into another table. Fires at ingestion."},
+  {n:"Materialized view",p:"Maintains an aggregate over a source table for querying. Fires as it is read and maintained."}
+ ],
+ line:"Transform on the way in, or keep a summary current for the way out.",
+ trap:"“As soon as it lands” is an update policy. “Analysts keep running the same aggregation” is a materialized view."},
+
+{d:3,t:"Monitoring hub vs Capacity Metrics vs Activator",
+ sides:[
+  {n:"Monitoring hub",p:"Run history for pipelines, notebooks, dataflows. Durations, errors, and rerun from failure."},
+  {n:"Capacity Metrics app",p:"Capacity unit consumption per item, smoothing, overages and throttling."},
+  {n:"Activator",p:"Rules on data values or events that trigger an action — Teams, email, Power Automate."}
+ ],
+ line:"Did the job run, is the capacity healthy, or has the data crossed a line?",
+ trap:"A pipeline failure notification is a failure-path activity. A business-threshold notification is Activator. They are not interchangeable."},
+
+{d:2,t:"Tumbling vs Hopping vs Sliding vs Session windows",
+ sides:[
+  {n:"Tumbling",p:"Fixed length, no overlap. One output per window."},
+  {n:"Hopping",p:"Fixed length with a shorter hop, so windows overlap."},
+  {n:"Sliding",p:"Emits when an event enters or leaves the window, not on a clock."},
+  {n:"Session",p:"Groups activity separated by a gap of inactivity."}
+ ],
+ line:"Count the durations in the stem: one is tumbling, two is hopping. “When activity stops” is session.",
+ trap:"“Every minute, over the last five minutes” is the classic hopping stem, and tumbling is the option most people take."}
+];
+
+/* ------------------------------------------------------------------ */
+/* storage: real if available, in-memory if the page is sandboxed      */
+const store=(()=>{try{localStorage.setItem("__t","1");localStorage.removeItem("__t");return localStorage;}
+  catch(e){const m={};return{getItem:k=>k in m?m[k]:null,setItem:(k,v)=>{m[k]=String(v);},removeItem:k=>{delete m[k];}};}})();
+
+const KEY="fdd.dp700.score.v1";
+let score=(()=>{try{return JSON.parse(store.getItem(KEY))||{};}catch(e){return{};}})();
+for(const d of [1,2,3]) score[d]=score[d]||{seen:0,right:0};
+
+const el=id=>document.getElementById(id);
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------------- tabs ---------------- */
+const NOTES={
+ drill:"One scenario at a time. Answer, then read which clause ruled each option out.",
+ guide:"Every rule in the drill, as a lookup. Search the phrase you saw in the question.",
+ pairs:"The item groups the exam builds its distractors from. One line separates each."
+};
+document.querySelectorAll('nav button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('nav button').forEach(o=>{
+      const on=o===b;
+      o.setAttribute('aria-selected',on);
+      el(o.getAttribute('aria-controls')).hidden=!on;
+    });
+    el('tabnote').textContent=NOTES[b.getAttribute('aria-controls')];
+  });
+});
+el('tabnote').textContent=NOTES.drill;
+
+/* ---------------- drill ---------------- */
+let order=[],idx=-1,current=null,revealed=false;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function newOrder(){order=shuffle(DRILL.map((_,i)=>i));idx=-1;}
+
+function meter(){
+  el('meter').innerHTML=[1,2,3].map(d=>{
+    const s=score[d],pct=s.seen?Math.round(s.right/s.seen*100):0;
+    return `<div class="mcol">
+      <div class="mbar"><i style="width:${s.seen?pct:0}%;background:${DOMAINS[d].css}"></i></div>
+      <div class="mlab"><span>${DOMAINS[d].short}</span><b>${s.seen?pct+"%":"—"}</b></div>
+    </div>`;
+  }).join("");
+}
+
+function markStem(text,trig){
+  let out=esc(text);
+  (trig||[]).forEach(t=>{const e=esc(t);out=out.replace(e,`<mark>${e}</mark>`);});
+  return out;
+}
+
+function draw(){
+  idx++;
+  if(idx>=order.length) newOrder(),idx=0;
+  current=DRILL[order[idx]];
+  revealed=false;
+  const D=DOMAINS[current.d];
+  el('qcard').className="card";
+  el('qcard').innerHTML=`
+    <div class="qhead">
+      <span class="chip ${D.cls}">${D.name}</span>
+      <span class="count">${idx+1} / ${order.length} this round</span>
+    </div>
+    <p class="stem">${markStem(current.stem,current.trig)}</p>
+    <p class="ask">${esc(current.ask)}</p>
+    <ul class="opts">${current.opts.map((o,i)=>
+      `<li><button class="opt" data-i="${i}"><span class="k">${"ABCD"[i]}</span><span class="body"><span class="t">${esc(o.t)}</span></span></button></li>`
+    ).join("")}</ul>`;
+  el('qcard').querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>reveal(+b.dataset.i)));
+  el('next').classList.add('hid');
+  el('skip').classList.remove('hid');
+}
+
+function reveal(picked){
+  if(revealed) return;
+  revealed=true;
+  const s=score[current.d];
+  s.seen++; if(current.opts[picked].ok) s.right++;
+  try{store.setItem(KEY,JSON.stringify(score));}catch(e){}
+  meter();
+
+  el('qcard').classList.add('revealed');
+  el('qcard').querySelectorAll('.opt').forEach((b,i)=>{
+    const o=current.opts[i];
+    b.classList.add(o.ok?'yes':'no');
+    if(i===picked) b.classList.add('picked');
+    const t=b.querySelector('.t');
+    t.insertAdjacentHTML('afterend', o.ok
+      ? `<span class="win">${esc(o.why)}</span>`
+      : `<span class="kill">ruled out by <b>“${esc(o.kill)}”</b> — ${esc(o.note)}</span>`);
+  });
+  el('qcard').insertAdjacentHTML('beforeend',
+    `<p class="take"><span class="lbl">Carry this</span><span>${esc(current.take)}</span></p>`);
+  el('next').classList.remove('hid');
+  el('skip').classList.add('hid');
+  el('next').focus();
+}
+
+el('next').addEventListener('click',draw);
+el('skip').addEventListener('click',draw);
+el('reset').addEventListener('click',()=>{
+  for(const d of [1,2,3]) score[d]={seen:0,right:0};
+  try{store.setItem(KEY,JSON.stringify(score));}catch(e){}
+  meter(); newOrder(); draw();
+});
+
+/* ---------------- guide ---------------- */
+const filters=new Set();
+function rows(){
+  const q=el('q').value.trim().toLowerCase();
+  const list=GUIDE.filter(r=>
+    (!filters.size||filters.has(r.d)) &&
+    (!q||(r.when+" "+r.pick+" "+r.not).toLowerCase().includes(q)));
+  el('rows').innerHTML=list.length? list.map(r=>`
+    <div class="row">
+      <div class="when"><span class="tag ${DOMAINS[r.d].cls}">${DOMAINS[r.d].short}</span>${esc(r.when)}</div>
+      <div class="pick">${esc(r.pick)}<span class="not">${esc(r.not)}</span></div>
+    </div>`).join("")
+    : `<p class="empty">Nothing matches that. Try a shorter phrase — the rules are indexed by the words the exam actually uses.</p>`;
+}
+el('q').addEventListener('input',rows);
+document.querySelectorAll('.filt').forEach(b=>b.addEventListener('click',()=>{
+  const d=+b.dataset.d, on=b.getAttribute('aria-pressed')==="true";
+  b.setAttribute('aria-pressed',!on);
+  on?filters.delete(d):filters.add(d);
+  rows();
+}));
+
+/* ---------------- pairs ---------------- */
+el('pairlist').innerHTML=PAIRS.map(p=>`
+  <div class="card pair">
+    <h3>${esc(p.t)}</h3>
+    <p class="sub">${DOMAINS[p.d].name}</p>
+    <div class="sides">${p.sides.map(s=>
+      `<div class="side"><span class="n">${esc(s.n)}</span><p class="p">${esc(s.p)}</p></div>`).join("")}</div>
+    <div class="line"><span class="lbl">The line between them</span>${esc(p.line)}</div>
+    <div class="trap"><span class="lbl">Where people lose the mark</span>${esc(p.trap)}</div>
+  </div>`).join("");
+
+/* ---------------- go ---------------- */
+meter(); newOrder(); draw(); rows();
+</script>
+</body>
+</html>
