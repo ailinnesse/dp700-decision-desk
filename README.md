@@ -20,6 +20,12 @@ So this drills the clause, not the definition. Answer a scenario and every wrong
 
 Content: 30 scenarios, 58 decision rules, 12 lookalike groups, balanced across the three exam domains.
 
+![The drill: a scenario with each wrong option struck through by the phrase that ruled it out](images/screenshot-drill.png)
+
+![The decision guide: every rule as a searchable lookup, filterable by exam domain](images/screenshot-guide.png)
+
+![Lookalikes: the item groups the exam builds its distractors from](images/screenshot-lookalikes.png)
+
 ## Run it
 
 It is one file with no build step and no dependencies.
