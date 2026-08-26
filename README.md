@@ -58,6 +58,8 @@ The most useful thing you can do with a fork is add the questions **you** got wr
 
 Every scenario is invented — no real data, no exam material. The rules are written from public Microsoft Learn documentation and the DP-700 skills-measured outline.
 
+I haven't yet verified every rule against a full DP-700 study cycle — corrections via issues or PRs are welcome.
+
 Fabric ships changes monthly and the skills-measured document is revised a few times a year. **Check anything here against the [official DP-700 study guide](https://learn.microsoft.com/en-gb/credentials/certifications/resources/study-guides/dp-700) before you trust it on exam day.**
 
 ## Licence
