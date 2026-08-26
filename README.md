@@ -2,7 +2,7 @@
 
 A scenario drill for **Exam DP-700: Implementing Data Engineering Solutions Using Microsoft Fabric**.
 
-**Live:** [_dp700-decision-desk_](https://ailinnesse.github.io/dp700-decision-desk/)
+**Live:** https://ailinnesse.github.io/dp700-decision-desk/
 
 ## Why this exists
 
