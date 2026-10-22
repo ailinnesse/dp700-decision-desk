@@ -331,7 +331,7 @@ const DRILL = [
   {t:"Change the connection after each deployment", kill:"without anyone editing it by hand", note:"The stem rules this out in as many words."},
   {t:"Merge a production branch in Git with different settings", kill:"promoted from the test workspace to production", note:"Workable in a code-first setup, but the stem is describing stage promotion, and rules are the built-in answer."}
  ],
- take:"“Different connection per stage, no manual step” is a deployment rule. Variable libraries are the newer way to hold those values in one place — check which one your study guide edition names."},
+ take:"“Different connection per stage, no manual step” is a deployment rule. Deployment rules cover semantic models (data source and parameter rules), Dataflow Gen1, paginated reports, mirrored databases, and the default lakehouse of a notebook. Variable libraries hold per-stage values for pipelines, notebooks, Dataflow Gen2, copy jobs and eventstreams — not semantic models — so for this stem it is a rule."},
 
 {d:1,
  stem:"Analysts querying a warehouse table must see only the rows for their own region, decided by the account they signed in with.",
@@ -362,12 +362,12 @@ const DRILL = [
  trig:["only that folder","from a Spark notebook"],
  ask:"What do you use?",
  opts:[
-  {t:"A OneLake data access role scoped to that folder", ok:true, why:"OneLake data access roles are the only control that applies at folder level and holds when the data is read directly through Spark rather than through the SQL endpoint."},
+  {t:"A OneLake security role scoped to that folder", ok:true, why:"OneLake security roles (formerly data access roles) grant folder-level access to users with Viewer or Read, and they hold when the data is read directly through Spark rather than through the SQL endpoint. Admins, Members and Contributors bypass them — which is why the Viewer detail is in the stem."},
   {t:"Row-level security on the SQL analytics endpoint", kill:"from a Spark notebook", note:"The classic trap. SQL-layer security is enforced by the SQL engine, and Spark reads the Delta files underneath it."},
   {t:"Item-level sharing on the lakehouse", kill:"only that folder", note:"Sharing an item grants the item. It has no folder granularity."},
   {t:"Upgrade them to Contributor on the workspace", kill:"only that folder", note:"Wrong direction entirely — that widens access and adds write."}
  ],
- take:"Whenever a question mentions Spark or OneLake file access alongside a security rule, SQL-layer answers are dead. Look for OneLake data access roles."},
+ take:"Whenever a question mentions Spark or OneLake file access alongside a security rule, SQL-layer answers are dead. Look for OneLake security roles."},
 
 {d:1,
  stem:"A team member must be able to create and run pipelines and notebooks in a workspace, but must not be able to add other people to it.",
@@ -391,7 +391,7 @@ const DRILL = [
   {t:"A sensitivity label", kill:"strongest quality signal", note:"Labels describe confidentiality, not trustworthiness."},
   {t:"Adding it to a domain", kill:"strongest quality signal", note:"Domains organise ownership across the tenant. They say nothing about quality."}
  ],
- take:"Two endorsement levels, one difference: promotion is self-service, certification is gated. Any mention of an approved group means certification."},
+ take:"Three badges: Promoted is self-service; Certified and Master data are both gated to admin-named users. Certified says the item meets quality standards; Master data says it is the core source of truth. Quality + approved group = certification."},
 
 {d:3,
  stem:"A Direct Lake semantic model was performing well. After a change to the lakehouse, users notice queries have become slower and the model is reported as falling back to DirectQuery.",
@@ -499,7 +499,7 @@ const DRILL = [
   {t:"Enable autotune", kill:"before any code executes", note:"Autotune adjusts Spark configuration for the workload once it is running."},
   {t:"Enable V-Order on writes", kill:"before any code executes", note:"A write-time optimisation for downstream reads. Unrelated to session start."}
  ],
- take:"Split every Spark performance question into start-up time and run time. Start-up → starter pool or high-concurrency session sharing. Run time → pool size, autotune, file layout."},
+ take:"Split every Spark performance question into start-up time and run time. Start-up → starter pool or high-concurrency session sharing (Microsoft also suggests a custom live pool for predictable starts on scheduled jobs). Run time → pool size, autotune, file layout."},
 
 {d:2,
  stem:"A pipeline must run the same notebook once for every file that arrived in a folder overnight, and the file count varies each night.",
@@ -554,7 +554,7 @@ const DRILL = [
  trig:["write to with T-SQL","multi-statement transactions"],
  ask:"Which item do they need?",
  opts:[
-  {t:"A warehouse", ok:true, why:"The warehouse gives full read and write T-SQL with multi-table transactions. It is the only Fabric item that does."},
+  {t:"A warehouse", ok:true, why:"The warehouse is the analytical item with full read-write T-SQL and multi-table transactions. SQL database in Fabric also writes T-SQL, but it is the OLTP option, not a lakehouse companion."},
   {t:"A lakehouse SQL analytics endpoint", kill:"write to with T-SQL", note:"The endpoint is read-only T-SQL over the lakehouse. This is the single most-tested distinction in the exam."},
   {t:"An eventhouse KQL database", kill:"T-SQL", note:"KQL, and built for append-only telemetry."},
   {t:"A lakehouse with a Spark notebook", kill:"write to with T-SQL", note:"Spark can write, but the stem is explicit that the writes are T-SQL."}
@@ -578,7 +578,7 @@ const GUIDE = [
 /* --- Implement & manage --- */
 {d:1,when:"Branching, pull requests, history of who changed what",pick:"Git integration",not:"not a deployment pipeline — those promote finished content, they have no branches"},
 {d:1,when:"Move approved content from dev to test to production",pick:"Deployment pipeline",not:"Git alone gives you no stage model"},
-{d:1,when:"Different connection or parameter value per stage, applied automatically",pick:"Deployment rule (or a variable library, in newer guidance)",not:"not a manual edit after each deployment"},
+{d:1,when:"Different connection or parameter value per stage, applied automatically",pick:"Deployment rule — or a variable library for pipelines, notebooks, Dataflow Gen2, copy jobs",not:"semantic models take rules, not variable libraries; never a manual edit"},
 {d:1,when:"Create and run items, but must not invite other people",pick:"Contributor",not:"Member is the rung where inviting starts"},
 {d:1,when:"Read finished reports only",pick:"Viewer",not:"Viewer cannot run a notebook or a pipeline"},
 {d:1,when:"Delete the workspace, change its capacity",pick:"Admin",not:"Member can do almost everything else"},
@@ -586,9 +586,9 @@ const GUIDE = [
 {d:1,when:"A whole column must be unavailable, query should fail",pick:"Column-level security (DENY)",not:"masking returns a value, so it is not a boundary"},
 {d:1,when:"Obscure a value on screen, no hard guarantee needed",pick:"Dynamic data masking",not:"never the answer when the stem says “must not infer”"},
 {d:1,when:"Hide an entire table or measure from a group",pick:"Object-level security",not:"RLS operates on rows, not objects"},
-{d:1,when:"Folder-level access inside a lakehouse, enforced for Spark",pick:"OneLake data access role",not:"SQL-endpoint security is bypassed when Spark reads the files"},
+{d:1,when:"Folder-level access inside a lakehouse, enforced for Spark",pick:"OneLake security role",not:"SQL-endpoint security is bypassed when Spark reads the files"},
 {d:1,when:"Share one item without granting the workspace",pick:"Item permissions",not:"a workspace role grants everything in it"},
-{d:1,when:"Highest trust signal, and only an approved group may set it",pick:"Certification",not:"promotion is self-service, which is why it is weaker"},
+{d:1,when:"Highest quality signal, and only an approved group may set it",pick:"Certification",not:"promotion is self-service; Master data means core source of truth, not quality"},
 {d:1,when:"Group workspaces into business areas for discovery and delegated admin",pick:"Domains",not:"capacity is compute, not organisation"},
 {d:1,when:"Classify confidentiality and carry it downstream on export",pick:"Sensitivity label",not:"a label does not block a query"},
 {d:1,when:"Isolate one team's compute and billing",pick:"A separate capacity",not:"a separate workspace shares the same capacity unless reassigned"},
@@ -607,12 +607,14 @@ const GUIDE = [
 {d:2,when:"Repeated deployments must leave the same result",pick:"Idempotent writes — MERGE, not INSERT",not:"append plus dedupe leaves a window where the table is wrong"},
 {d:2,when:"Continuous events from Event Hub, IoT Hub, Kafka",pick:"Eventstream",not:"a dataflow is batch-only"},
 {d:2,when:"High-volume append-only telemetry, sub-second queries, KQL",pick:"Eventhouse / KQL database",not:"a warehouse is the wrong shape for this"},
-{d:2,when:"T-SQL writes, multi-table transactions",pick:"Warehouse",not:"the lakehouse SQL analytics endpoint is read-only"},
+{d:2,when:"T-SQL writes, multi-table transactions, analytics",pick:"Warehouse",not:"the lakehouse SQL analytics endpoint is read-only"},
+{d:2,when:"Operational app database, OLTP, foreign keys",pick:"SQL database in Fabric",not:"a warehouse is for analytics, not app transactions"},
 {d:2,when:"Files, unstructured data, Spark, medallion layers",pick:"Lakehouse",not:"a warehouse will not hold arbitrary files"},
 {d:2,when:"Fixed non-overlapping buckets",pick:"Tumbling window",not:"hopping overlaps"},
 {d:2,when:"A window length and a separate reporting frequency",pick:"Hopping window",not:"tumbling only emits once per window"},
 {d:2,when:"Emit as events enter and leave",pick:"Sliding window",not:"not clock-driven"},
 {d:2,when:"Group bursts separated by idle time",pick:"Session window",not:"only when the stem mentions inactivity"},
+{d:2,when:"Group events that share exactly the same timestamp",pick:"Snapshot window",not:"no duration at all — that is the tell"},
 {d:2,when:"Transform each batch as it is ingested into an eventhouse",pick:"Update policy",not:"a materialized view maintains an aggregate for reads"},
 {d:2,when:"Keep a running aggregate current for analysts",pick:"Materialized view",not:"an update policy fires on ingest, not on query"},
 {d:2,when:"Loop over an unknown number of files",pick:"Get Metadata + ForEach",not:"Until is for waiting on a condition"},
@@ -623,7 +625,7 @@ const GUIDE = [
 {d:3,when:"Thousands of small files, reads slowing",pick:"OPTIMIZE",not:"VACUUM does not touch live files"},
 {d:3,when:"Storage cost from superseded versions",pick:"VACUUM, retention ≥ the time travel you promised",not:"never zero retention unless history is genuinely disposable"},
 {d:3,when:"Filters on one high-cardinality column scanning everything",pick:"Z-Order",not:"OPTIMIZE alone does not co-locate values"},
-{d:3,when:"Power BI reads from the lakehouse are slow",pick:"V-Order at write time",not:"a write-time setting, not something you run afterwards"},
+{d:3,when:"Power BI reads from the lakehouse are slow",pick:"V-Order — at write time, or on an existing table with OPTIMIZE … VORDER",not:"new workspaces have it off by default (writeHeavy profile), so check it is on"},
 {d:3,when:"Direct Lake model dropping to DirectQuery",pick:"Check for views instead of tables, unsupported features, SKU guardrails",not:"OPTIMIZE and V-Order help, they do not cause fallback"},
 {d:3,when:"Session start is slow, before any code runs",pick:"Starter pool, or high-concurrency session sharing",not:"bigger nodes still have to be provisioned"},
 {d:3,when:"Job runs but is slow once started",pick:"Pool size, autotune, file layout",not:"start-up and run time are different questions"},
@@ -650,13 +652,14 @@ const PAIRS = [
  line:"Is the source already files in a lake, a live operational database, or something you need a scheduled point-in-time copy of?",
  trap:"“Without duplicating storage” is a shortcut every time. “Near real time and no code” is mirroring every time."},
 
-{d:2,t:"Lakehouse vs Warehouse vs Eventhouse",
+{d:2,t:"Lakehouse vs Warehouse vs Eventhouse vs SQL database",
  sides:[
   {n:"Lakehouse",p:"Files and Delta tables. Spark writes. The SQL analytics endpoint over it is read-only T-SQL."},
   {n:"Warehouse",p:"Full T-SQL read and write, multi-table transactions, cross-database queries."},
-  {n:"Eventhouse",p:"KQL over high-volume append-only telemetry. Sub-second queries, hot cache and retention policies."}
+  {n:"Eventhouse",p:"KQL over high-volume append-only telemetry. Sub-second queries, hot cache and retention policies."},
+  {n:"SQL database",p:"Operational OLTP database for apps: T-SQL, ACID, foreign keys. Replicated into OneLake automatically for analytics."}
  ],
- line:"How is it written? Spark and files → lakehouse. T-SQL and transactions → warehouse. A firehose of events → eventhouse.",
+ line:"How is it written? Spark and files → lakehouse. T-SQL and transactions → warehouse. A firehose of events → eventhouse. An application's own database → SQL database.",
  trap:"The read-only SQL analytics endpoint is the most-tested fact in this group. If the stem says T-SQL INSERT or UPDATE, the lakehouse is out."},
 
 {d:2,t:"Dataflow Gen2 vs Notebook vs Copy activity vs Stored procedure",
@@ -677,14 +680,14 @@ const PAIRS = [
  line:"Git answers “what changed and who approved it”. Deployment pipelines answer “how does it get to production”.",
  trap:"Real teams use both, so the stem will lean on one word: review and branch mean Git, promote and stage mean deployment pipeline."},
 
-{d:1,t:"Workspace role vs Item permission vs OneLake data access role",
+{d:1,t:"Workspace role vs Item permission vs OneLake security role",
  sides:[
   {n:"Workspace role",p:"Viewer, Contributor, Member, Admin. Applies to everything in the workspace."},
   {n:"Item permission",p:"Shares a single item with someone who has no workspace role."},
-  {n:"OneLake data access role",p:"Folder-level RBAC inside a lakehouse. The only one of the three that constrains direct Spark and OneLake file access."}
+  {n:"OneLake security role",p:"Folder- and table-level access inside a lakehouse, optionally with row and column filters. The only one of the three that constrains direct Spark and OneLake file access. Applies to Viewers and Read users; Admin, Member and Contributor bypass it."}
  ],
  line:"How wide is the grant, and which engine is doing the reading?",
- trap:"SQL-layer security — RLS, CLS, masking — is enforced by the SQL engine. A Spark notebook reads the Delta files beneath it and is unaffected."},
+ trap:"Security defined in T-SQL on the SQL endpoint — RLS, CLS, masking — is enforced only by the SQL engine. A Spark notebook reads the Delta files beneath it and is unaffected. Row and column rules that must hold in Spark go in a OneLake security role."},
 
 {d:1,t:"RLS vs CLS vs Dynamic data masking vs OLS",
  sides:[
@@ -700,7 +703,7 @@ const PAIRS = [
  sides:[
   {n:"OPTIMIZE",p:"Compacts many small files into fewer large ones. Cures the small-file problem."},
   {n:"VACUUM",p:"Deletes files no longer referenced, older than the retention you set. Reclaims storage and ends time travel beyond that point."},
-  {n:"V-Order",p:"Write-time sorting and encoding that makes reads — especially Direct Lake — faster."},
+  {n:"V-Order",p:"Sorting and encoding that makes reads — especially Direct Lake — faster. Applied at write time or afterwards with OPTIMIZE. Off by default in new workspaces; costs ~15% on writes."},
   {n:"Z-Order",p:"Co-locates rows by chosen columns so selective filters skip more files."}
  ],
  line:"Too many files, too much old storage, slow reads downstream, or slow filters on one column?",
@@ -726,7 +729,7 @@ const PAIRS = [
 {d:2,t:"Update policy vs Materialized view (KQL)",
  sides:[
   {n:"Update policy",p:"Runs a query over each ingested batch and writes the result into another table. Fires at ingestion."},
-  {n:"Materialized view",p:"Maintains an aggregate over a source table for querying. Fires as it is read and maintained."}
+  {n:"Materialized view",p:"Keeps an aggregate over a source table current for querying: a background process materializes it, and queries add any newer rows on the fly."}
  ],
  line:"Transform on the way in, or keep a summary current for the way out.",
  trap:"“As soon as it lands” is an update policy. “Analysts keep running the same aggregation” is a materialized view."},
@@ -740,14 +743,15 @@ const PAIRS = [
  line:"Did the job run, is the capacity healthy, or has the data crossed a line?",
  trap:"A pipeline failure notification is a failure-path activity. A business-threshold notification is Activator. They are not interchangeable."},
 
-{d:2,t:"Tumbling vs Hopping vs Sliding vs Session windows",
+{d:2,t:"Tumbling vs Hopping vs Sliding vs Session vs Snapshot windows",
  sides:[
   {n:"Tumbling",p:"Fixed length, no overlap. One output per window."},
   {n:"Hopping",p:"Fixed length with a shorter hop, so windows overlap."},
   {n:"Sliding",p:"Emits when an event enters or leaves the window, not on a clock."},
-  {n:"Session",p:"Groups activity separated by a gap of inactivity."}
+  {n:"Session",p:"Groups activity separated by a gap of inactivity, capped by a maximum duration."},
+  {n:"Snapshot",p:"Groups events with the same timestamp."}
  ],
- line:"Count the durations in the stem: one is tumbling, two is hopping. “When activity stops” is session.",
+ line:"Count the durations in the stem: one is tumbling, two is hopping, none is snapshot. “When activity stops” is session.",
  trap:"“Every minute, over the last five minutes” is the classic hopping stem, and tumbling is the option most people take."}
 ];
 

@@ -18,7 +18,7 @@ So this drills the clause, not the definition. Answer a scenario and every wrong
 | **Decision guide** | Every rule as a searchable lookup — search the phrase you saw in the question. |
 | **Lookalikes** | The item groups the exam builds its distractors from, with the one line that separates each. |
 
-Content: 30 scenarios, 58 decision rules, 12 lookalike groups, balanced across the three exam domains.
+Content: 30 scenarios, 60 decision rules, 12 lookalike groups, balanced across the three exam domains.
 
 ![The drill: a scenario with each wrong option struck through by the phrase that ruled it out](images/screenshot-drill.png)
 
